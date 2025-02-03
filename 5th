@@ -1,0 +1,18 @@
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer
+
+def stem_words(words):
+    stemmer = PorterStemmer()
+    return [stemmer.stem(word) for word in words]
+
+def morphological_parsing(text):
+    nltk.download('punkt')
+    words = word_tokenize(text)
+    stemmed_words = stem_words(words)
+    print("Original Words:", words)
+    print("Stemmed Words:", stemmed_words)
+
+if _name_ == "_main_":
+    text = "running jumped easily leaves cats dogs."
+    morphological_parsing(text)
