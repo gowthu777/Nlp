@@ -1,0 +1,29 @@
+import re
+
+def main():
+    text = "The quick brown fox jumps over the lazy dog. Call me at 123-456-7890 or email me at example@mail.com."
+    
+    # Pattern to find words starting with 'b'
+    pattern1 = r'\bb\w*'
+    matches1 = re.findall(pattern1, text)
+    print("Words starting with 'b':", matches1)
+    
+    # Pattern to find phone numbers (XXX-XXX-XXXX format)
+    pattern2 = r'\d{3}-\d{3}-\d{4}'
+    match2 = re.search(pattern2, text)
+    if match2:
+        print("Phone number found:", match2.group())
+    
+    # Pattern to find email addresses
+    pattern3 = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    match3 = re.search(pattern3, text)
+    if match3:
+        print("Email found:", match3.group())
+    
+    # Pattern to replace all vowels with '*'
+    pattern4 = r'[aeiouAEIOU]'
+    modified_text = re.sub(pattern4, '*', text)
+    print("Text after replacing vowels:", modified_text)
+
+if _name_ == "_main_":
+    main()
