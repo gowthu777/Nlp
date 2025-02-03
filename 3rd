@@ -1,0 +1,27 @@
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk.corpus import wordnet
+
+# Ensure necessary resources are downloaded
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+
+def morphological_analysis(text):
+    tokens = word_tokenize(text)
+    stemmer = PorterStemmer()
+    lemmatizer = WordNetLemmatizer()
+    
+    print("Original Words:", tokens)
+    print("Stemming Results:", [stemmer.stem(word) for word in tokens])
+    print("Lemmatization Results:", [lemmatizer.lemmatize(word, wordnet.VERB) for word in tokens])
+
+# Example text
+def main():
+    text = "Running jumped quickly and happily."
+    morphological_analysis(text)
+
+# Run demonstration
+if name == "main":
+    main()
