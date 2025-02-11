@@ -1,0 +1,26 @@
+import random
+from collections import defaultdict
+def build_bigram_model(text):
+    words = text.split()
+    bigrams = list(zip(words, words[1:]))
+    model = defaultdict(list)
+    for w1, w2 in bigrams:
+        model[w1].append(w2)
+    return model
+def generate_text(model, start_word, length=10):
+    current_word = start_word
+    generated_text = [current_word]
+    for _ in range(length - 1):
+        if current_word in model:
+            next_word = random.choice(model[current_word])
+            generated_text.append(next_word)
+            current_word = next_word
+        else:
+            break
+    return " ".join(generated_text)
+user_input = input("Enter a text sample: ")
+bigram_model = build_bigram_model(user_input)
+start_word = random.choice(user_input.split())
+generated_text = generate_text(bigram_model, start_word)
+print("\nGenerated Text:")
+print(generated_text)
