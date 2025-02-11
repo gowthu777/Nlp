@@ -1,0 +1,16 @@
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.tag import RegexpTagger
+patterns = [
+    (r'.*ing$', 'VBG'),
+    (r'.*ed$', 'VBD'),     
+    (r'.*es$', 'VBZ'),     
+    (r'.*s$', 'NNS'),      
+    (r'^[A-Z].*$', 'NNP'), 
+    (r'.*', 'NN')          
+]
+regexp_tagger = RegexpTagger(patterns)
+text = input("Enter a sentence: ")
+tokens = word_tokenize(text)
+tagged_output = regexp_tagger.tag(tokens)
+print("POS Tagged Output:", tagged_output)
