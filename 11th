@@ -1,0 +1,20 @@
+import nltk
+from nltk import CFG
+grammar = CFG.fromstring("""
+    S -> NP VP
+    NP -> Det N | N
+    VP -> V NP | V
+    Det -> 'the' | 'a'
+    N -> 'cat' | 'dog' | 'ball'
+    V -> 'chased' | 'saw' | 'ate'
+""")
+parser = nltk.RecursiveDescentParser(grammar)
+sentence = input("Enter a sentence: ").lower()
+tokens = sentence.split()
+print("\nParsing Results:")
+parsed = False
+for tree in parser.parse(tokens):
+    print(tree)
+    parsed = True
+if not parsed:
+    print("The input sentence is not valid according to the grammar.")
