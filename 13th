@@ -1,0 +1,22 @@
+import nltk
+from nltk import CFG
+from nltk.parse import EarleyChartParser
+import matplotlib.pyplot as pltgrammar = CFG.fromstring("""
+    S -> NP VP
+    NP -> Det N | N
+    VP -> V NP | V
+    Det -> 'the' | 'a'
+    N -> 'cat' | 'dog' | 'ball'
+    V -> 'chased' | 'saw' | 'ate' | 'runs'
+""")
+parser = EarleyChartParser(grammar)
+sentence = input("Enter a sentence: ").lower()
+tokens = sentence.split()
+print("\nParsing Results:")
+parsed = False
+for tree in parser.parse(tokens):
+    print(tree)
+    tree.draw()
+    parsed = True
+if not parsed:
+    print("The input sentence is not valid according to the grammar.")
