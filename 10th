@@ -1,0 +1,12 @@
+import nltk
+from nltk.tag import brill, brill_trainer
+nltk.download('treebank')
+nltk.download('averaged_perceptron_tagger')
+from nltk.corpus import treebank
+train_sents = treebank.tagged_sents()[:3000]
+baseline_tagger = nltk.tag.UnigramTagger(train_sents, backoff=nltk.tag.DefaultTagger('NN'))
+trainer = brill_trainer.BrillTaggerTrainer(baseline_tagger, brill.brill24(), deterministic=True)
+brill_tagger = trainer.train(train_sents)
+sentence = input("Enter a sentence: ").split()
+tagged_sentence = brill_tagger.tag(sentence)
+print("POS Tagged Sentence:", tagged_sentence)
